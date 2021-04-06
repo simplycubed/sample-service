@@ -18,6 +18,7 @@ steps:
   - '-c'
   - |
     cat /root/.ssh/id_github
+    chmod 600 /root/.ssh/id_github
     ssh-agent bash -c 'ssh-add /root/.ssh/id_github; git clone git@github.com:simplycubed/sample-service-env.git'
   volumes:
   - name: 'ssh'
