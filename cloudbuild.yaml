@@ -17,12 +17,24 @@ steps:
   args:
   - '-c'
   - |
-    cat /root/.ssh/id_github
     chmod 600 /root/.ssh/id_github
-    ssh-agent bash -c 'ssh-add /root/.ssh/id_github; git clone git@github.com:simplycubed/sample-service-env.git'
+    cat <<EOF >/root/.ssh/config
+    Hostname github.com
+    IdentityFile /root/.ssh/id_github
+    EOF
+    ssh-keyscan -t rsa github.com > /root/.ssh/known_hosts
   volumes:
   - name: 'ssh'
     path: /root/.ssh
 
+# Connect to the repository
+- name: 'gcr.io/cloud-builders/git'
+  args:
+  - clone
+  - --recurse-submodules
+  - ssh://git@github.com:simplycubed/sample-service-env.git 
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
 substitutions:
     _IMAGE: sample-service
