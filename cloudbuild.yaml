@@ -32,7 +32,7 @@ steps:
   args:
   - clone
   - --recurse-submodules
-  - git@github.com:simplycubed/sample-service-env.git 
+  - ssh://git@github.com:simplycubed/sample-service-env.git 
   volumes:
   - name: 'ssh'
     path: /root/.ssh
