@@ -36,3 +36,5 @@ steps:
   volumes:
   - name: 'ssh'
     path: /root/.ssh
+substitutions:
+    _IMAGE: sample-service
