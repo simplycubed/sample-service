@@ -1,9 +1,9 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/$_IMAGE', '.']
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/$_IMAGE:$SHORT_SHA', '.']
   timeout: 500s
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/$_IMAGE']
+  args: ['push', 'gcr.io/$PROJECT_ID/$_IMAGE:$SHORT_SHA']
 - name: gcr.io/cloud-builders/gcloud
   entrypoint: 'bash'
   args: [ '-c', 'gcloud  beta secrets versions access latest --secret=env-repo-ssh-key > /root/.ssh/id_github' ]
@@ -36,5 +36,13 @@ steps:
   volumes:
   - name: 'ssh'
     path: /root/.ssh
+- id: generate_manifest
+  name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+     sed -i '0,/^\([[:space:]]*image: *\).*/s//\gcr.io/$PROJECT_ID/$_IMAGE:$SHORT_SHA/;' sample-service-env/$REPO_NAME/deployment.yaml
+     cat sample-service-env/$REPO_NAME/deployment.yaml 
 substitutions:
     _IMAGE: sample-service
