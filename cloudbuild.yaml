@@ -44,5 +44,19 @@ steps:
   - |
      sed -i '0,/^\([[:space:]]*image: *\).*/s//\gcr.io/$PROJECT_ID/$_IMAGE:$SHORT_SHA/;' sample-service-env/$REPO_NAME/deployment.yaml
      cat sample-service-env/$REPO_NAME/deployment.yaml 
+# Connect to the repository
+- name: 'gcr.io/cloud-builders/git'
+  entrypont: /bin/bash
+  args:
+   - '-c'
+   - |
+       cd sample-service-env
+       git add .
+       git commit -m "Update manifest"
+       git push
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
 substitutions:
     _IMAGE: sample-service
+  
