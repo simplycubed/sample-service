@@ -51,6 +51,8 @@ steps:
    - '-c'
    - |
        cd sample-service-env
+       git config --global user.email "cloudbuild@google.com"
+       git config --global user.name "Cloudbuild"
        git add .
        git commit -m "Update manifest"
        git push
