@@ -46,7 +46,7 @@ steps:
      cat sample-service-env/$REPO_NAME/deployment.yaml 
 # Connect to the repository
 - name: 'gcr.io/cloud-builders/git'
-  entrypont: /bin/bash
+  entrypoint: /bin/bash
   args:
    - '-c'
    - |
