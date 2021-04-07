@@ -42,7 +42,7 @@ steps:
   args:
   - '-c'
   - |
-     sed -i '0,/^\([[:space:]]*image: *\).*/s//\gcr.io/$PROJECT_ID/$_IMAGE:$SHORT_SHA/;' sample-service-env/$REPO_NAME/deployment.yaml
+     sed -i '0,/^\([[:space:]]*image: *\).*/s//\gcr.io\/$PROJECT_ID\/$_IMAGE:$SHORT_SHA/' sample-service-env/$REPO_NAME/deployment.yaml
      cat sample-service-env/$REPO_NAME/deployment.yaml 
 # Connect to the repository
 - name: 'gcr.io/cloud-builders/git'
