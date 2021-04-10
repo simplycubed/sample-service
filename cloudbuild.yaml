@@ -37,7 +37,7 @@ steps:
   - name: 'ssh'
     path: /root/.ssh
 - id: generate_manifest
-  name: 'gcr.io/smart-dev-30760/yq:v1'
+  name: 'gcr.io/smart-dev-307608/yq:v1'
   args:
   - '-c'
   - |
