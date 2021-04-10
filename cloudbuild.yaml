@@ -43,8 +43,7 @@ steps:
   args:
   - '-c'
   - |
-     yq e '.spec.template.spec.containers[0].image=env(PROJECT_IMAGE)'  sample-service-env/$REPO_NAME/deployment.yaml
-     cat sample-service-env/$REPO_NAME/deployment.yaml 
+     yq e '.spec.template.spec.containers[0].image=env(PROJECT_IMAGE)' -i sample-service-env/$REPO_NAME/deployment.yaml
 # Connect to the repository
 - name: 'gcr.io/cloud-builders/git'
   entrypoint: /bin/bash
