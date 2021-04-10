@@ -43,7 +43,6 @@ steps:
   args:
   - '-c'
   - |
-     echo $PROJECT_IMAGE
      yq e '.spec.template.spec.containers[0].image=env(PROJECT_IMAGE)'  sample-service-env/$REPO_NAME/deployment.yaml
      cat sample-service-env/$REPO_NAME/deployment.yaml 
 # Connect to the repository
