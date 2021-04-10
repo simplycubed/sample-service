@@ -47,10 +47,10 @@ steps:
 # Connect to the repository
 - name: 'gcr.io/cloud-builders/git'
   entrypoint: /bin/bash
+  dir: sample-service-env
   args:
    - '-c'
    - |
-       cd sample-service-env
        git config --global user.email "cloudbuild@google.com"
        git config --global user.name "Cloudbuild"
        git add .
