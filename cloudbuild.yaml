@@ -42,6 +42,7 @@ steps:
   - '-c'
   - |
      IMAGE=gcr.io/$PROJECT_ID/$_IMAGE:$SHORT_SHA
+     echo $IMAGE
      yq e '.spec.template.spec.containers[0].image=env(IMAGE)'  sample-service-env/$REPO_NAME/deployment.yaml
      cat sample-service-env/$REPO_NAME/deployment.yaml 
 # Connect to the repository
