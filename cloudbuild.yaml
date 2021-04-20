@@ -37,7 +37,7 @@ steps:
   - name: 'ssh'
     path: /root/.ssh
 - id: generate_manifest
-  name: 'gcr.io/smart-dev-307608/yq:v1'
+  name: 'gcr.io/$PROJECT_ID/yq:v1'
   env:
   - "PROJECT_IMAGE=gcr.io/$PROJECT_ID/$_IMAGE:$SHORT_SHA"
   args:
