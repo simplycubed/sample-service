@@ -71,8 +71,8 @@ substitutions:
 
 availableSecrets:
   secretManager:
-  - versionName: projects/$PROJECT_NUMBER/secrets/env-repo-ssh-key/versions/latest
-    env: 'GITHUB_TOKEN'
+  # - versionName: projects/$PROJECT_NUMBER/secrets/env-repo-ssh-key/versions/latest
+  #   env: 'GITHUB_TOKEN'
   - versionName: projects/$PROJECT_NUMBER/secrets/temp-secret/versions/latest
     env: 'TEMP_SECRET'
 
