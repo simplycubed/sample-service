@@ -5,7 +5,7 @@ steps:
 
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
-  args: ['echo -n $$TEMP_SECRET']
+  args: ['-c', 'echo -n $$TEMP_SECRET']
   secretEnv: ['TEMP_SECRET']
 
 - name: gcr.io/cloud-builders/gcloud
