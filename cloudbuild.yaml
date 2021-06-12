@@ -5,7 +5,7 @@ steps:
 
 - name: gcr.io/cloud-builders/gcloud
   entrypoint: 'bash'
-  args: [ '-c', 'echo -n $GITHUB_TOKEN > /root/.ssh/id_github' ]
+  args: [ '-c', 'echo $$GITHUB_TOKEN > /root/.ssh/id_github' ]
   secretEnv: ['GITHUB_TOKEN']
   volumes:
   - name: 'ssh'
