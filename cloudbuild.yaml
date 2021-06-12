@@ -3,10 +3,14 @@ steps:
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/$_IMAGE:$SHORT_SHA', '.']
   timeout: 500s
 
-- name: gcr.io/cloud-builders/docker
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args: ['echo -n $$TEMP_SECRET']
+  secretEnv: ['TEMP_SECRET']
+
+- name: gcr.io/cloud-builders/gcloud
   entrypoint: 'bash'
   args: [ '-c', 'gcloud  beta secrets versions access latest --secret=env-repo-ssh-key > /root/.ssh/id_github' ]
-  secretEnv: ['GITHUB_TOKEN']
   volumes:
   - name: 'ssh'
     path: /root/.ssh
@@ -69,5 +73,7 @@ availableSecrets:
   secretManager:
   - versionName: projects/$PROJECT_NUMBER/secrets/env-repo-ssh-key/versions/latest
     env: 'GITHUB_TOKEN'
+  - versionName: projects/$PROJECT_NUMBER/secrets/temp-secret/versions/latest
+    env: 'TEMP_SECRET'
 
 images: ['gcr.io/$PROJECT_ID/$_IMAGE:$SHORT_SHA']
