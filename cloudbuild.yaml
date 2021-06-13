@@ -30,6 +30,7 @@ steps:
   volumes:
   - name: 'ssh'
     path: /root/.ssh
+
 - id: generate_manifest
   name: 'gcr.io/$PROJECT_ID/yq:v1'
   env:
@@ -37,20 +38,20 @@ steps:
   args:
   - '-c'
   - |
-     yq e '.spec.template.spec.containers[0].image=env(PROJECT_IMAGE)' -i $_ENV_REPO/$REPO_NAME/deployment.yaml
+    yq e '.spec.template.spec.containers[0].image=env(PROJECT_IMAGE)' -i $_ENV_REPO/$REPO_NAME/deployment.yaml
 
 # Connect to the repository
 - name: 'gcr.io/cloud-builders/git'
   entrypoint: /bin/bash
   dir: $_ENV_REPO
   args:
-   - '-c'
-   - |
-       git config --global user.email "cloudbuild@google.com"
-       git config --global user.name "Cloudbuild"
-       git add .
-       git commit -m "Update manifest"
-       git push
+  - '-c'
+  - |
+    git config --global user.email "cloudbuild@google.com"
+    git config --global user.name "Cloudbuild"
+    git add .
+    git commit -m "Update manifest"
+    git push
   volumes:
   - name: 'ssh'
     path: /root/.ssh
