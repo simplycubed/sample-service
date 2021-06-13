@@ -33,12 +33,13 @@ steps:
 
 - id: generate_manifest
   name: 'asia.gcr.io/$PROJECT_ID/yq:latest'
+  entrypoint: 'bash'
   env:
   - "PROJECT_IMAGE=asia.gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA"
   args:
   - '-c'
   - |
-     e '.spec.template.spec.containers[0].image=env(PROJECT_IMAGE)' -i $_ENV_REPO/$REPO_NAME/deployment.yaml
+     yq e '.spec.template.spec.containers[0].image=env(PROJECT_IMAGE)' -i $_ENV_REPO/$REPO_NAME/deployment.yaml
 
 # Connect to the repository
 - name: 'gcr.io/cloud-builders/git'
