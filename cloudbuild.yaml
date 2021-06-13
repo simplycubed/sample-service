@@ -5,8 +5,7 @@ steps:
 
 - name: gcr.io/cloud-builders/gcloud
   entrypoint: 'bash'
-  args: [ '-c', 'echo $$GITHUB_TOKEN > /root/.ssh/id_github' ]
-  secretEnv: ['GITHUB_TOKEN']
+  args: [ '-c', 'gcloud  beta secrets versions access latest --secret=env-repo-ssh-key > /root/.ssh/id_github' 
   volumes:
   - name: 'ssh'
     path: /root/.ssh
@@ -64,10 +63,5 @@ steps:
 substitutions:
   _IMAGE: sample-service
   _ENV_REPO: sample-service-env
-
-availableSecrets:
-  secretManager:
-  - versionName: projects/$PROJECT_NUMBER/secrets/env-repo-ssh-key/versions/latest
-    env: 'GITHUB_TOKEN'
 
 images: ['gcr.io/$PROJECT_ID/$_IMAGE:$SHORT_SHA']
