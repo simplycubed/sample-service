@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA', '.']
+  args: ['build', '-t', 'asia.gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA', '.']
   timeout: 500s
 
 # Set up git with key and domain
@@ -34,24 +34,24 @@ steps:
 - id: generate_manifest
   name: 'gcr.io/$PROJECT_ID/yq:v1'
   env:
-  - "PROJECT_IMAGE=gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA"
+  - "PROJECT_IMAGE=asia.gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA"
   args:
   - '-c'
   - |
-    yq e '.spec.template.spec.containers[0].image=env(PROJECT_IMAGE)' -i $_ENV_REPO/$REPO_NAME/deployment.yaml
+     yq e '.spec.template.spec.containers[0].image=env(PROJECT_IMAGE)' -i $_ENV_REPO/$REPO_NAME/deployment.yaml
 
 # Connect to the repository
 - name: 'gcr.io/cloud-builders/git'
   entrypoint: /bin/bash
   dir: $_ENV_REPO
   args:
-  - '-c'
-  - |
-    git config --global user.email "cloudbuild@google.com"
-    git config --global user.name "Cloudbuild"
-    git add .
-    git commit -m "Update manifest"
-    git push
+   - '-c'
+   - |
+       git config --global user.email "cloudbuild@google.com"
+       git config --global user.name "Cloudbuild"
+       git add .
+       git commit -m "Update manifest"
+       git push
   volumes:
   - name: 'ssh'
     path: /root/.ssh
@@ -64,4 +64,4 @@ availableSecrets:
   - versionName: projects/$PROJECT_NUMBER/secrets/env-repo-ssh-key/versions/latest
     env: 'SSH_KEY'
 
-images: ['gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA']
+images: ['asia.gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA']
