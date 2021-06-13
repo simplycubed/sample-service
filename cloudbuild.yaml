@@ -5,7 +5,7 @@ steps:
 
 - name: gcr.io/cloud-builders/gcloud
   entrypoint: 'bash'
-  args: [ '-c', 'gcloud  beta secrets versions access latest --secret=env-repo-ssh-key > /root/.ssh/id_github' 
+  args: [ '-c', 'gcloud  beta secrets versions access latest --secret=env-repo-ssh-key > /root/.ssh/id_github']
   volumes:
   - name: 'ssh'
     path: /root/.ssh
