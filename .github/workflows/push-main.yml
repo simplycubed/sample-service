@@ -28,7 +28,7 @@ jobs:
         - name: update gitops
           uses: denispalnitsky/gitops-release@v7
           with:
-            file: "cms/deployment.yaml"
+            filename: "cms/deployment.yaml"
             key: "image"
             value: '${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}'
             github-token: ${{ secrets.ENV_ACCESS_TOKEN }}
