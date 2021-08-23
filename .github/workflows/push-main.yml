@@ -31,6 +31,6 @@ jobs:
             filename: "cms/deployment.yaml"
             key: "image"
             value: '${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}'
-            github-deploy-private-key: ${{ secrets.GITOPS_SSH_PRIVATE_KEY }}
+            github-deploy-key: ${{ secrets.GITOPS_SSH_PRIVATE_KEY }}
             github-org-and-repo:  "simplycubed/maas-env"
             
