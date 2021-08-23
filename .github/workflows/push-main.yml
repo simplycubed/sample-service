@@ -26,11 +26,11 @@ jobs:
             docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}
         - name: update gitops
-          uses: denispalnitsky/gitops-release@v7
+          uses: simplycubed/gitops-update@0.1
           with:
             filename: "cms/deployment.yaml"
             key: "image"
             value: '${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}'
-            github-token: ${{ secrets.ENV_ACCESS_TOKEN }}
+            github-deploy-private-key: ${{ secrets.GITOPS_SSH_PRIVATE_KEY }}
             github-org-and-repo:  "simplycubed/maas-env"
             
