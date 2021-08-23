@@ -26,7 +26,7 @@ jobs:
             docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}
         - name: update gitops
-          uses: simplycubed/gitops-update@0.4
+          uses: simplycubed/gitops-update@0.5
           with:
             filename: "cms/deployment.yaml"
             key: "image"
