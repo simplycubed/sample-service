@@ -29,7 +29,7 @@ jobs:
           uses: simplycubed/gitops-update@master
           with:
             filename: "cms/deployment.yaml"
-            key: "image"
+            key: "spec.template.spec.containers.0.image"
             value: '${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}'
             github-deploy-key: ${{ secrets.GITOPS_SSH_PRIVATE_KEY }}
             github-org-and-repo:  "simplycubed/maas-env"
