@@ -9,5 +9,9 @@ RUN  go build -v -o app
 
 FROM scratch as app
 COPY --from=base app /
+
+RUN useradd -ms /bin/bash 1001 nonroot
+USER nonroot
+
 EXPOSE 8080
 CMD ["/app"]
