@@ -10,7 +10,7 @@ RUN  go build -v -o app
 FROM scratch as app
 COPY --from=base app /
 
-RUN useradd -ms /bin/bash 1001 nonroot
+ADD passwd.minimal /etc/passwd
 USER nonroot
 
 EXPOSE 8080
