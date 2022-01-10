@@ -1,0 +1,17 @@
+steps:
+  - name: "gcr.io/cloud-builders/go"
+    args: ["install", "."]
+    env:
+      [
+        "GO111MODULE=on",
+        "CGO_ENABLED=0",
+        "PROJECT_ROOT=github.com/simplycubed/sample-service",
+      ]
+  - name: "gcr.io/cloud-builders/go"
+    args: ["build", "."]
+    env:
+      [
+        "GO111MODULE=on",
+        "CGO_ENABLED=0",
+        "PROJECT_ROOT=github.com/simplycubed/sample-service",
+      ]
